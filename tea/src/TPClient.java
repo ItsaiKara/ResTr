@@ -108,7 +108,7 @@ public class TPClient extends Frame {
 			System.exit(0);
 		}*/
 		try {
-			int number = 0;
+			//int number = 0;
 			TPClient tPClient = new TPClient(0,0,1,1);
 			tPClient.minit(0,0,1,1);
 			

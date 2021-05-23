@@ -50,7 +50,6 @@ public class TPPanel extends Panel {
 	{
 		public void actionPerformed(ActionEvent e)
 		{
-
 			main.haut();
 		}
 	}
@@ -58,7 +57,6 @@ public class TPPanel extends Panel {
 	{
 		public void actionPerformed(ActionEvent e)
 		{
-
 			main.bas();
 		}
 	}
