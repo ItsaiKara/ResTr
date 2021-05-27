@@ -67,6 +67,7 @@ public class TPCanvas extends Canvas {
 	public void drawPlayer(Graphics win, int x, int y, byte type)
 	{
 		 win.setColor(color[type]);
+		// win.fillOval ((x*size/nbPosition)+1,(y*size/nbPosition)+1, size/nbPosition-1, size/nbPosition-1);
 		 win.fillOval ((x*size/nbPosition)+1,(y*size/nbPosition)+1, size/nbPosition-1, size/nbPosition-1);
 	}
 	

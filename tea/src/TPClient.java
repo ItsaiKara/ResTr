@@ -107,12 +107,19 @@ public class TPClient extends Frame {
 			System.out.println("Usage : java TPClient number color positionX positionY ");
 			System.exit(0);
 		}*/
+		Joueur jr = new Joueur(1);
+		Joueur jb = new Joueur(2);
 		try {
 			//int number = 0;
 			TPClient tPClient = new TPClient(0,0,1,1);
 			tPClient.minit(0,0,1,1);
 			
+		
+			//tPClient.etat[1] = 2;
+			//tPClient.etat[10] = 2;
 
+			tPClient.etat[1] = 1;
+			
 			// Pour fermeture
 			tPClient.addWindowListener(new WindowAdapter() {
 				public void windowClosing(WindowEvent e) {
