@@ -180,7 +180,7 @@ public class Serveur {
             System.exit(-1);
         }
         
-        while (true) {            
+        while (!victoire(Jetons)) {            
             for (Jeton Jeton : Jetons) {
                 try {
                     String recu = input.readLine();
