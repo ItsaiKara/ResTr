@@ -34,6 +34,7 @@ public class TPCanvas extends Canvas {
 	
 	public Dimension getMinimumSize() {
 	    return new Dimension(size, size); 
+	 
 	  }
 
 	public void paintCarte(Graphics win)
@@ -50,6 +51,10 @@ public class TPCanvas extends Canvas {
 			win.drawLine(i*size/nbPosition, 0, i*size/nbPosition, size);
 			win.drawLine(0, i*size/nbPosition, size, i*size/nbPosition);
 		}
+		
+
+
+
 	}
 
 	public void drawEtat(Graphics win)
@@ -67,7 +72,6 @@ public class TPCanvas extends Canvas {
 	public void drawPlayer(Graphics win, int x, int y, byte type)
 	{
 		 win.setColor(color[type]);
-		// win.fillOval ((x*size/nbPosition)+1,(y*size/nbPosition)+1, size/nbPosition-1, size/nbPosition-1);
 		 win.fillOval ((x*size/nbPosition)+1,(y*size/nbPosition)+1, size/nbPosition-1, size/nbPosition-1);
 	}
 	
