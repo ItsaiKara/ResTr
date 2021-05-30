@@ -40,7 +40,7 @@ public class TPClient extends Frame {
 		setLayout(new BorderLayout());
 		tpPanel = new TPPanel(this);
 		add("North", tpPanel);
-		tpCanvas = new TPCanvas(this.etat);
+		tpCanvas = new TPCanvas(this.etat , jetons);
 		add("Center", tpCanvas);
 		
 		timer = new Timer();
@@ -53,9 +53,10 @@ public class TPClient extends Frame {
 	{
 		System.out.println("Droit");
 		try{
-		    output.println("droite");
-                    jetons = (ArrayList < Jeton >) input.readObject();
-                    tpCanvas.repaint();
+			output.println("droite");
+			jetons = (ArrayList < Jeton >) input.readObject();
+			tpCanvas.setJetons(jetons);
+			tpCanvas.repaint();
 		}
 		catch(Exception e)
                 {
@@ -100,7 +101,7 @@ public class TPClient extends Frame {
 		System.out.println("Bas");
 		try{
 		    output.println("bas");
-                    tpCanvas.repaint();
+			tpCanvas.repaint();
 		}
 		catch(Exception e)
                 {

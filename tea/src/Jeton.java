@@ -41,5 +41,12 @@ public class Jeton implements Serializable{
     public boolean getEquipe() {
         return equipe;
     }
+
+	@Override
+	public String toString() {
+		return "Jeton{" + "x=" + x + ", y=" + y + ", equipe=" + equipe + '}';
+	}
+	
+	
     
 }
