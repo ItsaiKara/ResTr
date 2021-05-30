@@ -25,13 +25,13 @@ public class TPCanvas extends Canvas {
 	
 	public TPCanvas(byte [] pEtat, ArrayList<Jeton> jt)
 	{
-		this.etat = pEtat;
-		this.jetons = jt;
+		this.etat = pEtat; //unused
+		this.jetons = jt; //Liste des jetons
 	}
 		
 	public void paint(Graphics win)
 	{
-		System.out.println("Paint");
+		//System.out.println("Paint");
 		paintCarte(win);
 		drawEtat(win);
 	}
@@ -41,6 +41,10 @@ public class TPCanvas extends Canvas {
 	 
 	  }
 
+	/**
+	 * Affiche la carte de jeu
+	 * @param win 
+	 */
 	public void paintCarte(Graphics win)
 	{
 		int h,w;
@@ -57,19 +61,16 @@ public class TPCanvas extends Canvas {
 		}
 	}
 
-	public void drawEtat(Graphics win)
-	{
-		for (int i=0;i<=10;i++){
-//			for (Jeton jeton : jt) {
-//			System.out.println(jeton.toString());
-//			}
-			for (int j = 0; j <= 10; j++) {
-				//System.out.println(i + " " + j);
-				for (Jeton jeton : getJetons()) {
-//					System.out.println(jeton.toString());
-					if (jeton.getX() == i && jeton.getY() == j) {
-						System.err.println("Match");
-						if (jeton.getEquipe()) {
+	/**
+	 * Appelé a chaque actualisation et repaint, prétraitement pour l'affichage des joueurs
+	 * @param win 
+	 */
+	public void drawEtat(Graphics win){ 
+		for (int i=0;i<=10;i++){ //axe X
+			for (int j = 0; j <= 10; j++) { //axe Y
+				for (Jeton jeton : getJetons()) { //La liste des jetons
+					if (jeton.getX() == i && jeton.getY() == j) { //Si un jeton dans la liste poséde les coordonées <i,j> (i = x, j= y)
+						if (jeton.getEquipe()) { //Appel la fonction drawplayer avec la bonne equipe en parametre (affichage des couleurs)
 							drawPlayer(win, jeton.getY(), jeton.getX(), 1);
 						} else {
 							drawPlayer(win, jeton.getY(), jeton.getX(), 2);
@@ -80,17 +81,31 @@ public class TPCanvas extends Canvas {
 			}
 		}
 	}
-	
+	/**
+	 * Affiche les joueurs dans les bonnes cases
+	 * @param win
+	 * @param x
+	 * @param y
+	 * @param type 
+	 */
 	public void drawPlayer(Graphics win, int x, int y, int type)
 	{
 		 win.setColor(color[type]);
 		 win.fillOval ((x*size/nbPosition)+1,(y*size/nbPosition)+1, size/nbPosition-1, size/nbPosition-1);
 	}
 
+	/**
+	 * Setter simple
+	 * @param jetons 
+	 */
 	public void setJetons(ArrayList<Jeton> jetons) {
 		this.jetons = jetons;
 	}
 
+	/**
+	 * Getter simple
+	 * @return 
+	 */
         public ArrayList<Jeton> getJetons() {
             return jetons;
         }

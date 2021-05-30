@@ -56,7 +56,7 @@ public class TPClient extends Frame {
 		try{
 			output.println("droite");
 			jetons = (ArrayList < Jeton >) input.readObject();
-                        tpCanvas.setJetons(jetons);
+                      tpCanvas.setJetons(jetons);
 			tpCanvas.repaint();
 		}
 		catch(Exception e)

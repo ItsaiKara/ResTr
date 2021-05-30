@@ -33,6 +33,10 @@ public class TPPanel extends Panel {
 		this.add(bBas);
 	}
 
+	
+	/**
+	 * Classe gérant les actions des bouttons
+	 */
 	class ListenBoutonDroit implements ActionListener
 	{
 		public void actionPerformed(ActionEvent e)
