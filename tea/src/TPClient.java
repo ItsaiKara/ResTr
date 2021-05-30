@@ -18,7 +18,8 @@ import java.util.ArrayList;
 
 
 /**
- * @author Alain BOUJU
+ * @author gprebot
+ * @author teloy
  *
  */
 public class TPClient extends Frame {

@@ -17,6 +17,7 @@ import java.util.ArrayList;
 /**
  *
  * @author gprebot
+ * @author teloy
  */
 public class Serveur {
 	public static final int portEcoute = 2000;

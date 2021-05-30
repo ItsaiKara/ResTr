@@ -5,7 +5,8 @@ import java.awt.Graphics;
 import java.util.ArrayList;
 
 /**
- * @author Alain BOUJU
+ * @author gprebot
+ * @author teloy
  *
  */
 public class TPCanvas extends Canvas {
