@@ -13,7 +13,7 @@ public class TPCanvas extends Canvas {
 	int size =1000;
 	int nbPosition = 10;
 	byte [] etat;
-	ArrayList<Jeton> jetons; 
+	ArrayList<Jeton> jetons = new ArrayList<>(); 
 	
 	Color [] color = {Color.black,Color.blue,Color.red, Color.green, Color.yellow}; 
 	// 0 black
@@ -26,16 +26,13 @@ public class TPCanvas extends Canvas {
 	{
 		this.etat = pEtat;
 		this.jetons = jt;
-		for (Jeton jeton : jetons) {
-			System.out.println(jeton.toString());
-		}
 	}
 		
 	public void paint(Graphics win)
 	{
 		System.out.println("Paint");
 		paintCarte(win);
-		drawEtat(win, jetons);
+		drawEtat(win);
 	}
 	
 	public Dimension getMinimumSize() {
@@ -59,16 +56,16 @@ public class TPCanvas extends Canvas {
 		}
 	}
 
-	public void drawEtat(Graphics win, ArrayList<Jeton> jt)
+	public void drawEtat(Graphics win)
 	{
 		for (int i=0;i<=10;i++){
-			for (Jeton jeton : jt) {
-			System.out.println(jeton.toString());
-			}
+//			for (Jeton jeton : jt) {
+//			System.out.println(jeton.toString());
+//			}
 			for (int j = 0; j <= 10; j++) {
 				//System.out.println(i + " " + j);
-				for (Jeton jeton : jt) {
-					System.out.println(jeton.toString());
+				for (Jeton jeton : getJetons()) {
+//					System.out.println(jeton.toString());
 					if (jeton.getX() == i && jeton.getY() == j) {
 						System.err.println("Match");
 						if (jeton.getEquipe()) {
@@ -92,6 +89,12 @@ public class TPCanvas extends Canvas {
 	public void setJetons(ArrayList<Jeton> jetons) {
 		this.jetons = jetons;
 	}
+
+        public ArrayList<Jeton> getJetons() {
+            return jetons;
+        }
+        
+        
 	
 	
 }

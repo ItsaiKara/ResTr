@@ -15,6 +15,7 @@ public class Jeton implements Serializable{
     private int x;
     private int y;
     private final boolean equipe;
+    private static final long serialVersionUID = 1L;
 
     public Jeton(int x, int y, boolean equipe) {
         this.x = x;

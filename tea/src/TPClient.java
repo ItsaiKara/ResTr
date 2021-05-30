@@ -15,8 +15,7 @@ import java.io.ObjectInputStream;
 import java.io.PrintWriter;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 
 /**
  * @author Alain BOUJU
@@ -30,6 +29,7 @@ public class TPClient extends Frame {
 	TPPanel tpPanel;
 	TPCanvas tpCanvas;
 	Timer timer;
+        static Socket socket = null;
         static PrintWriter output = null;
         static ObjectInputStream input = null;
         static ArrayList<Jeton> jetons;
@@ -42,7 +42,7 @@ public class TPClient extends Frame {
 		add("North", tpPanel);
 		tpCanvas = new TPCanvas(this.etat , jetons);
 		add("Center", tpCanvas);
-		
+
 		timer = new Timer();
 		timer.schedule ( new MyTimerTask (  ) , 500,500) ;
 
@@ -55,7 +55,7 @@ public class TPClient extends Frame {
 		try{
 			output.println("droite");
 			jetons = (ArrayList < Jeton >) input.readObject();
-			tpCanvas.setJetons(jetons);
+                        tpCanvas.setJetons(jetons);
 			tpCanvas.repaint();
 		}
 		catch(Exception e)
@@ -71,6 +71,8 @@ public class TPClient extends Frame {
 		System.out.println("Gauche");
 		try{
 		    output.println("gauche");
+                    jetons = (ArrayList < Jeton >) input.readObject();
+                    tpCanvas.setJetons(jetons);
                     tpCanvas.repaint();
 		}
 		catch(Exception e)
@@ -86,6 +88,8 @@ public class TPClient extends Frame {
 		System.out.println("Haut");
 		try{
                     output.println("haut");
+                    jetons = (ArrayList < Jeton >) input.readObject();
+                    tpCanvas.setJetons(jetons);
                     tpCanvas.repaint();
 		}
 		catch(Exception e)
@@ -101,7 +105,9 @@ public class TPClient extends Frame {
 		System.out.println("Bas");
 		try{
 		    output.println("bas");
-			tpCanvas.repaint();
+                    jetons = (ArrayList < Jeton >) input.readObject();
+                    tpCanvas.setJetons(jetons);
+                    tpCanvas.repaint();
 		}
 		catch(Exception e)
                 {
@@ -132,15 +138,38 @@ public class TPClient extends Frame {
 //
 //	}
 	/** Initialisations */
-	/**public void minit(int number, int pteam, int px, int py)
-	{
-		try{
-		}
-		catch (IOException ex) {
-			ex.printStackTrace();
-		}
-
-	}**/
+//	public void minit()
+//	{
+//            // Creation de la socket
+//            try {
+//                socket = new Socket("localhost", Serveur.portEcoute);
+//            } catch(UnknownHostException e) {
+//                System.err.println("Erreur sur l'hôte : " + e);
+//                System.exit(-1);
+//            } catch(IOException e) {
+//                System.err.println("Creation de la socket impossible : " + e);
+//                System.exit(-1);
+//            }
+//            
+//            // Association d'un flux d'entree et de sortie
+//            try {
+//                input = new ObjectInputStream(socket.getInputStream());
+//                output = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())), true);
+//            } catch(IOException e) {
+//                System.err.println("Association des flux impossible : " + e);
+//                System.exit(-1);
+//            }
+//            
+//            try {
+//                jetons = (ArrayList < Jeton >) input.readObject();
+//            } catch (IOException e) {
+//                System.err.println("Erreur de reception des jetons: " + e);
+//                System.exit(-1);
+//            } catch (ClassNotFoundException e) {
+//                System.err.println("Erreur de reception des jetons, classe non trouvé: " + e);
+//                System.exit(-1);
+//            }
+//	}
 	
 	public String etat()
 	{
@@ -153,7 +182,6 @@ public class TPClient extends Frame {
 	public static void main(String[] args) {
             
             // Creation de la socket
-            Socket socket = null;
             try {
                 socket = new Socket("localhost", Serveur.portEcoute);
             } catch(UnknownHostException e) {
@@ -163,10 +191,8 @@ public class TPClient extends Frame {
                 System.err.println("Creation de la socket impossible : " + e);
                 System.exit(-1);
             }
-
-            // Association d'un flux d'entree et de sortie
-            //BufferedReader input = null;
             
+            // Association d'un flux d'entree et de sortie
             try {
                 input = new ObjectInputStream(socket.getInputStream());
                 output = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())), true);
@@ -184,11 +210,6 @@ public class TPClient extends Frame {
                 System.err.println("Erreur de reception des jetons, classe non trouvé: " + e);
                 System.exit(-1);
             }
-            
-            jetons.forEach(jeton -> {
-                System.out.println(jeton.toString());
-        });
-            
 //            System.out.println("args :"+args.length);
 //            if (args.length != 4) {
 //                    System.out.println("Usage : java TPClient number color positionX positionY ");
@@ -196,6 +217,7 @@ public class TPClient extends Frame {
 //            }
             try {
                     TPClient tPClient = new TPClient();
+                    
                     // tPClient.minit(number, team, x, y);
 
 
@@ -221,8 +243,8 @@ public class TPClient extends Frame {
 		
 		public void run ()
 		{
-			System.out.println("refresh");
-          		refresh();
+			//System.out.println("refresh");
+          		//refresh();
 		}
 	}
 	

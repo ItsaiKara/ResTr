@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -11,8 +12,7 @@ import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 
 /**
  *
@@ -64,11 +64,13 @@ public class Serveur {
     public static boolean haut(Jeton jetonABouge, ArrayList<Jeton>jetons){
         
         if (jetonABouge.getX()-1 < 0) {
+            System.err.println("Deplacement hors terrain !");
             return false;
         }
         
         for (Jeton jeton : jetons) {
             if (jetonABouge.getX()-1 == jeton.getX() && jetonABouge.getY() == jeton.getY()) {
+                System.err.println("Joueurs dejà sur la case !");
                 return false;
             }
         }
@@ -78,11 +80,13 @@ public class Serveur {
     public static boolean bas(Jeton jetonABouge, ArrayList<Jeton>jetons){
         
         if (jetonABouge.getX()+1 > 9) {
+            System.err.println("Deplacement hors terrain !");
             return false;
         }
         
         for (Jeton jeton : jetons) {
             if (jetonABouge.getX()+1 == jeton.getX() && jetonABouge.getY() == jeton.getY()) {
+                System.err.println("Joueurs dejà sur la case !");
                 return false;
             }
         }
@@ -92,11 +96,13 @@ public class Serveur {
     public static boolean gauche(Jeton jetonABouge, ArrayList<Jeton>jetons){
         
         if (jetonABouge.getY()-1 < 0) {
+            System.err.println("Deplacement hors terrain !");
             return false;
         }
         
         for (Jeton jeton : jetons) {
             if (jetonABouge.getX() == jeton.getX() && jetonABouge.getY()-1 == jeton.getY()) {
+                System.err.println("Joueurs dejà sur la case !");
                 return false;
             }
         }
@@ -106,11 +112,13 @@ public class Serveur {
     public static boolean droite(Jeton jetonABouge, ArrayList<Jeton>jetons){
         
         if (jetonABouge.getY()+1 > 9) {
+            System.err.println("Deplacement hors terrain !");
             return false;
         }
         
         for (Jeton jeton : jetons) {
             if (jetonABouge.getX() == jeton.getX() && jetonABouge.getY()+1 == jeton.getY()) {
+                System.err.println("Joueurs dejà sur la case !");
                 return false;
             }
         }
@@ -122,16 +130,17 @@ public class Serveur {
         ArrayList<Jeton>Jetons = new ArrayList<>();
         
         // Equipe Bleu (false)
-        Jeton JetonBleu1 = new Jeton(0,5,false);
-        Jeton JetonBleu2 = new Jeton(0,6,false);
+        Jeton JetonBleu1 = new Jeton(0,4,false);
+        Jeton JetonBleu2 = new Jeton(0,5,false);
         // Equipe Rouge (true)
-        Jeton JetonRouge1 = new Jeton(9,5,true);
-        Jeton JetonRouge2 = new Jeton(9,6,true);
+        Jeton JetonRouge1 = new Jeton(9,4,true);
+        Jeton JetonRouge2 = new Jeton(9,5,true);
         
         Jetons.add(JetonBleu1);
         Jetons.add(JetonBleu2);
         Jetons.add(JetonRouge1);
         Jetons.add(JetonRouge2);
+        
         
         // Creation de la socket serveur
 	ServerSocket socketServeur = null;
@@ -188,19 +197,25 @@ public class Serveur {
                             break;
                         case "gauche":
                             if (gauche(Jeton, Jetons)) {
-                                Jeton.setX(Jeton.getY()-1);
+                                Jeton.setY(Jeton.getY()-1);
                             }
                             break;
                         case "droite":
                             if (droite(Jeton, Jetons)) {
-                                Jeton.setX(Jeton.getY()+1);
+                                Jeton.setY(Jeton.getY()+1);
                             }
                             break;
                         default:
                             System.out.println("Commande non reconnu : " + recu);
                             System.exit(0);
                     }
-                    output.writeObject(Jetons);
+                    ArrayList<Jeton>tampon = new ArrayList<>();
+                    Jetons.forEach(jeton -> {
+                        tampon.add(new Jeton(jeton.getX(),jeton.getY(),jeton.getEquipe()));
+                        System.out.println(jeton.toString());
+                    });
+                    System.out.println("--------");
+                    output.writeObject(tampon);
                 }
                 catch(IOException e) {
                     System.err.println("Erreur lors de la lecture : " + e);
