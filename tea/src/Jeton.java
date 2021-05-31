@@ -18,6 +18,12 @@ public class Jeton implements Serializable{
     private final boolean equipe;
     private static final long serialVersionUID = 1L;
 
+	/**
+	 * Constructeur de la classe
+	 * @param x la coordonée en x du jeton
+	 * @param y la coordonée en y du jeton
+	 * @param equipe //L'equipe dans laquelle se trouve le jeton
+	 */
     public Jeton(int x, int y, boolean equipe) {
         this.x = x;
         this.y = y;
