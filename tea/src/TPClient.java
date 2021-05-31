@@ -41,7 +41,14 @@ public class TPClient extends Frame {
         add("Center", tpCanvas);
         
     }
-    
+    /**
+     * Chaque appuie sur un bouton envoi la commande correspondante
+     * On recupere ensuite la liste des jetons à placer sur la grille
+     * une fois le déplacement effectué par le serveur
+     * Cette liste est transmise au Canvas pour affichage
+     * Si la socket est fermé par le serveur, cela signifie
+     * l'arrêt du jeu
+     */
     /** Action vers droit */
     public synchronized void droit()
     {
@@ -115,6 +122,9 @@ public class TPClient extends Frame {
         
     }
     
+    /**
+     * Fonction commandant l'arrêt du client
+     */
     public void fin ()
     {
         // Fermeture des flux et des sockets
@@ -163,6 +173,10 @@ public class TPClient extends Frame {
             System.exit(-1);
         }
         
+        /*
+        * Initialisation des jetons avec leur position de début de partie
+        * Rouge en haut, Bleu en bas
+        */
         try {
             jetons = (ArrayList < Jeton >) input.readObject();
         } catch (IOException e) {

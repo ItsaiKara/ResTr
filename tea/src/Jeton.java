@@ -10,6 +10,7 @@ import java.io.Serializable;
  *
  * @author gprebot
  * @author teloy
+ * Classe representant les jetons posé sur la grille de jeu
  */
 public class Jeton implements Serializable{
     private int x;

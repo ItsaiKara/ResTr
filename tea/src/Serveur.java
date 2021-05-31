@@ -21,16 +21,17 @@ import java.util.ArrayList;
 public class Serveur {
     public static final int portEcoute = 2000;
     
+    /* Verification de victoire d'une des équipe */
     public static boolean victoire(ArrayList<Jeton>jetons){
         boolean blocageHaut = false;
         boolean blocageBas = false;
         boolean blocageGauche = false;
         boolean blocageDroit = false;
         
-        for (Jeton jeton : jetons) {
+        for (Jeton jeton : jetons) { // On verifie chaque jetons pour determiner si certains sont bloqué
             for (Jeton jetonAutre : jetons) {
                 if (jeton.getX()-1 == jetonAutre.getX() && jeton.getY() == jetonAutre.getY()) {
-                    if (jeton.getEquipe() != jetonAutre.getEquipe()) {
+                    if (jeton.getEquipe() != jetonAutre.getEquipe()) { // Si le jeton bloquant n'est pas de la même équipe
                         blocageHaut = true;
                     }
                 }
@@ -50,16 +51,16 @@ public class Serveur {
                     }
                 }
             }
-            if ((blocageBas && blocageHaut) || (blocageGauche && blocageDroit)) {
-                if (!jeton.getEquipe()) {
-                    System.out.println("Victoire equipe Bleu");
+            if ((blocageBas && blocageHaut) || (blocageGauche && blocageDroit)) { // Si le jeton est bloqué verticalement
+                if (!jeton.getEquipe()) {                                         // OU horizontalement alors la victoire est
+                    System.out.println("Victoire equipe Bleu");                   // déclaré pour l'equipe adverse
                 }
                 else{
                     System.out.println("Victoire equipe Rouge");
                 }
                 return true;
             }
-            else{
+            else{                           // Sinon on verifie les jetons restant
                 blocageBas = false;
                 blocageHaut = false;
                 blocageDroit = false;
@@ -134,7 +135,7 @@ public class Serveur {
     }
     
     public static void main(String args[]){
-        
+        // Liste des jetons de chaque equipe
         ArrayList<Jeton>Jetons = new ArrayList<>();
         
         // Equipe Bleu (false)
@@ -187,15 +188,16 @@ public class Serveur {
             System.err.println("Erreur lors de l'envoie des jetons : " + e);
             System.exit(-1);
         }
+        // Tant qu'aucune equipe n'a gagnée
         boolean victoire = true;
         while (victoire) {
             for (Jeton Jeton : Jetons) {
-                if (victoire(Jetons)) {
+                if (victoire(Jetons)) { // verification de victoire
                     victoire = false;
                     break;
                 }
                 try {
-                    String recu = input.readLine();
+                    String recu = input.readLine(); // Recuperation de la commande de déplacement
                     switch(recu){
                         case "haut":
                             if (haut(Jeton, Jetons)) {
@@ -219,8 +221,14 @@ public class Serveur {
                             break;
                         default:
                             System.out.println("Commande non reconnu : " + recu);
-                            System.exit(0);
+                            System.exit(0); // Un peu extrême
                     }
+                    
+                    /**
+                     * Une fois le deplacement effectué, s'il était possible,
+                     * on envoi l'état du jeu au client sous la forme d'une
+                     * liste contenant les jetons en jeu
+                     */
                     ArrayList<Jeton>tampon = new ArrayList<>();
                     Jetons.forEach(jeton -> {
                         tampon.add(new Jeton(jeton.getX(),jeton.getY(),jeton.getEquipe()));
