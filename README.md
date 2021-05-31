@@ -12,9 +12,9 @@
 ## Lancer le jeu
 
 Une fois dans le bon dossier avec le terminal, lancez d'abords le serveur, puis le client en utilisant les commandes suivantes:
-> javac Serveur.java
-> javac TPClient.java
-> java Serveur
+> javac Serveur.java  
+> javac TPClient.java  
+> java Serveur  
 
 Puis dans un autre terminal après l'avoirs mis dans le bon dossier :
 > java TPClient
