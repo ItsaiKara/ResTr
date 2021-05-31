@@ -15,7 +15,8 @@ import java.util.ArrayList;
 
 
 /**
- * @author Alain BOUJU
+ * @author gprebot
+ * @author teloy
  *
  */
 public class TPClient extends Frame {
@@ -129,7 +130,7 @@ public class TPClient extends Frame {
         } catch(IOException e) {
             System.err.println("Erreur lors de la fermeture des flux et des sockets : " + e);
             System.exit(-1);
-        } 
+        }
     }
     
     public String etat()

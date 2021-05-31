@@ -9,6 +9,7 @@ import java.io.Serializable;
 /**
  *
  * @author gprebot
+ * @author teloy
  */
 public class Jeton implements Serializable{
     private int x;

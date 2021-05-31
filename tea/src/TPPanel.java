@@ -4,7 +4,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- * @author Alain BOUJU
+ * @author gprebot
+ * @author teloy
  *
  */
 public class TPPanel extends Panel {
@@ -32,6 +33,10 @@ public class TPPanel extends Panel {
 		this.add(bBas);
 	}
 
+	
+	/**
+	 * Classe gérant les actions des bouttons
+	 */
 	class ListenBoutonDroit implements ActionListener
 	{
 		public void actionPerformed(ActionEvent e)
